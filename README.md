@@ -1,7 +1,5 @@
 # 用 Python 发送企业微信消息
 
-参考了：[https://github.com/Micro-sheep/wechat_work](https://github.com/Micro-sheep/wechat_work)，因自己使用，修改了部分代码。
-
 支持发送：
 - 文本
 - 文件
@@ -10,7 +8,7 @@
 
 ## 安装
 ```sh
-pip install wechat_enterprise
+pip install wechat-enterprise-sdk
 ```
 
 ## 使用
@@ -36,6 +34,11 @@ we.send_image("/Users/aaron/Downloads/images.jpeg", receivers)
 # 发送文件
 we.send_file("./wechat_enterprise.py", receivers)
 ```
+
+## todo
+
+添加企业微信的其他实用功能
+
 ## 联系我
 
 添加微信 「somenzz」 备注 「github」

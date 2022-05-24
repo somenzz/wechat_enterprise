@@ -15,16 +15,15 @@ README = Path("./README.md")
 LICENSE = Path("./LICENSE").read_text()
 version = "0.1"
 
-NAME = "wechat_enterprise"
+NAME = "wechat_enterprise_sdk"
 VERSION = version
 DESCRIPTION = ""
-KEYWORDS = "python wechat enterprise, wechat_enterprise"
+KEYWORDS = "python wechat enterprise, wechat_enterprise,send message"
 AUTHOR = "somenzz"
 AUTHOR_EMAIL = "somenzz@163.com"
 URL = "https://github.com/somenzz/wechat_enterprise"
-PACKAGES = find_packages(exclude=["tests", "tests.*"])
-
-INSTALL_REQUIRES = []
+PACKAGES = ["wechat_enterprise"]
+INSTALL_REQUIRES = ["requests", "requests_toolbelt"]
 TEST_SUITE = ""
 TESTS_REQUIRE = []
 
@@ -55,6 +54,7 @@ params = {
     "tests_require": TESTS_REQUIRE,
     "test_suite": TEST_SUITE,
     "classifiers": CLASSIFIERS,
+    "zip_safe": False,
     "long_description": README.read_text(),
 }
 
