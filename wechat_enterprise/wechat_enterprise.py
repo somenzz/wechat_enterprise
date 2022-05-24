@@ -1,4 +1,3 @@
-from os import access
 from pathlib import Path
 from typing import List
 import requests
@@ -120,6 +119,7 @@ class WechatEnterprise:
                 cache_dict: dict = json.loads(cache.read_text())
                 if (
                     cache_dict["access_token"]
+                    and cache_dict["corpsecret"] == self.corpsecret
                     and datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     <= cache_dict["token_valid_time"]
                 ):
@@ -132,9 +132,9 @@ class WechatEnterprise:
         _token_valid_time = (datetime.now() + timedelta(seconds=7190)).strftime(
             "%Y-%m-%d %H:%M:%S"
         )
-        print(_token_valid_time)
         json.dump(
             {
+                "corpsecret": self.corpsecret,
                 "access_token": access_token,
                 "token_valid_time": _token_valid_time,
             },
