@@ -3,4 +3,6 @@ tmp/
 .DS_Store
 build/
 dist/
-
+env
+tests.py
+tests/

@@ -14,6 +14,7 @@ class WechatEnterprise:
     UPLOAD_URL = "https://qyapi.weixin.qq.com/cgi-bin/media/upload"
     SEND_URL = "https://qyapi.weixin.qq.com/cgi-bin/message/send"
     TOKEN_URL = "https://qyapi.weixin.qq.com/cgi-bin/gettoken"
+    GET_USER_URL = "https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token={ACCESS_TOKEN}&userid={USERID}"
 
     def __init__(self, corpid: str, appid: str, corpsecret: str) -> None:
         """
@@ -32,6 +33,25 @@ class WechatEnterprise:
         self.appid = appid
         self.corpsecret = corpsecret
         self.access_token = self.get_access_token()
+    
+    def get_department_id(self, ID = 0):
+        url = "https://qyapi.weixin.qq.com/cgi-bin/department/simplelist?access_token={ACCESS_TOKEN}&id={ID}"
+        response = requests.get(url.format(ACCESS_TOKEN = self.access_token, ID=ID))
+        return response.json()
+
+    def get_department_userlist(self, department_id = 1):
+        url = "https://qyapi.weixin.qq.com/cgi-bin/user/simplelist?access_token={ACCESS_TOKEN}&department_id={DEPARTMENT_ID}"
+        response = requests.get(url.format(ACCESS_TOKEN = self.access_token, DEPARTMENT_ID = department_id))
+        return response.json()
+
+
+    def get_user_info(self, userid):
+        """
+        userid	是	成员UserID。对应管理端的账号，企业内必须唯一。不区分大小写，长度为1~64个字节, 应用须拥有指定成员的查看权限。
+        """
+        url = self.GET_USER_URL.format(ACCESS_TOKEN= self.access_token,USERID = userid)
+        response = requests.get(url)
+        return response.json()
 
     def upload_file(self, filepath: str, filename: str) -> str:
         """
@@ -215,3 +235,14 @@ class WechatEnterprise:
             接受消息的用户账号列表
         """
         return self.send(msg_type="markdown", users=users, content=content)
+
+    def get_userid(self, telephone):
+        url = "https://qyapi.weixin.qq.com/cgi-bin//user/getuserid?access_token={}".format(self.get_access_token())
+        headers = {'Content-Type': 'application/json'}
+        body = {'mobile': telephone}
+        response = requests.post(url, data=json.dumps(body), headers=headers)
+        res = response.json()
+        if res['errmsg'] == 'ok':
+            return res.get("userid")
+        else:
+            raise Exception(res['errmsg'])
