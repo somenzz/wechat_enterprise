@@ -33,6 +33,9 @@ we.send_markdown("# Markdown", receivers)
 we.send_image("/Users/aaron/Downloads/images.jpeg", receivers)
 # 发送文件
 we.send_file("./wechat_enterprise.py", receivers)
+# 根据手机号获取企业微信账号：
+userid = we.get_userid("138********")
+we.send_text("hello",[userid,])
 ```
 
 ## todo
@@ -41,6 +44,6 @@ we.send_file("./wechat_enterprise.py", receivers)
 
 ## 联系我
 
-添加微信 「somenzz」 备注 「github」
+添加微信 「somenzz-enjoy」 备注 「github」
 
 个人公众号 「Python七号」，微信搜一搜关注。
