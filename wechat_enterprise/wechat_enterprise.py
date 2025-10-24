@@ -86,7 +86,7 @@ class WechatEnterprise:
 
     def send(
         self, msg_type: str, users: List[str], content: str = None, media_id: str = None
-    ) -> bool:
+    ) -> dict:
         """
         发送消息
 
@@ -111,8 +111,7 @@ class WechatEnterprise:
 
         Returns
         -------
-        bool
-            是否发送成功
+        dict
         """
         userid_str = "|".join(users)
         access_token = self.access_token
@@ -129,7 +128,7 @@ class WechatEnterprise:
         params = {"access_token": access_token}
 
         response = requests.post(self.SEND_URL, params=params, json=data)
-        return response.json()["errmsg"] == "ok"
+        return response.json()
 
     def get_access_token(self) -> str:
         cache = Path("./tmp/cache.json")
