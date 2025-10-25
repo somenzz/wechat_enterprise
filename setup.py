@@ -13,7 +13,7 @@ except ImportError:
 
 README = Path("./README.md")
 LICENSE = Path("./LICENSE").read_text()
-version = "0.4.2"
+version = "1.0.0"
 
 NAME = "wechat_enterprise_sdk"
 VERSION = version
